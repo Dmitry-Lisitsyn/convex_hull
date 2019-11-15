@@ -1,13 +1,14 @@
+import java.awt.*;
 class Polygon extends Deq implements Figure {
     private double s, p;
+    private int kol_reber;
     private void grow(R2Point a, R2Point b, R2Point t) {
         p -= R2Point.dist(a, b);
         s += Math.abs(R2Point.area(a, b, t));
     }
+
     public Polygon(R2Point a, R2Point b, R2Point c) {
         pushFront(b);
-
-
         if (b.light(a, c)) {
             pushFront(a); pushBack(c);
         } else {
@@ -16,12 +17,16 @@ class Polygon extends Deq implements Figure {
         p = R2Point.dist(a, b) + R2Point.dist(b, c)
                 + R2Point.dist(c, a);
         s = Math.abs(R2Point.area(a, b, c));
+
     }
     public double perimeter() {
         return p;
     }
     public double area() {
         return s;
+    }
+    public int rebra(){
+        return kol_reber;
     }
     public Figure add(R2Point t) {
         int i;
@@ -46,5 +51,19 @@ class Polygon extends Deq implements Figure {
             pushFront(t);
         }
         return this;
+    }
+
+    public void draw(Graphics g) {
+        g.setColor(Color.RED);
+        g.fillOval(0-2,0-2,4,4);
+        for(int i = length();i>0;i-=1){
+            g.setColor(Color.GREEN);
+            g.fillOval((int)(front().x-5), (int)(front().y-5), 10, 10);
+            g.setColor(Color.RED);
+            g.drawLine((int)(front().x), (int)(front().y),(int)(back().x), (int)(back().y));
+
+            pushFront(popBack());
+        }
+
     }
 }

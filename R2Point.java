@@ -1,15 +1,20 @@
 import java.util.Scanner;
 class R2Point {
-    private double x, y;
+    protected double x, y;
+    private boolean a = false;
     public R2Point(double x, double y) {
         this.x = x; this.y = y;
     }
+
     public R2Point() throws Exception {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите х:");
-        x = sc.nextDouble();
-        System.out.println("Введите у:");
-        y = sc.nextDouble();
+
+        {
+            System.out.println("Введите х:");
+            x = sc.nextDouble();
+            System.out.println("Введите у:");
+            y = sc.nextDouble();
+        }
     }
     public static double dist(R2Point a, R2Point b) {
         return Math.sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
